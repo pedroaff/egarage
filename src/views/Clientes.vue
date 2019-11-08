@@ -9,7 +9,7 @@
         </b-table>
     <div>
         <router-link to="/clientes/criar">
-            <b-button variant="primary">Criar cliente</b-button>
+            <b-button class="float-left" variant="primary">Criar cliente</b-button>
         </router-link>
     </div>
   </div>

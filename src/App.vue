@@ -3,7 +3,6 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/funcionarios">Funcionarios</router-link> |
       <router-link to="/clientes">Clientes</router-link> |
       <router-link to="/veiculos">Veículos</router-link> |
       <router-link to="/perfil">Perfil</router-link>

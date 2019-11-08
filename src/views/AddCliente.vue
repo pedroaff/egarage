@@ -92,7 +92,7 @@
         
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Salvar</b-button>
+      <b-button class="float-left" type="submit" variant="primary">Salvar</b-button>
 
      </b-form>
   </div>
