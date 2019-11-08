@@ -7,6 +7,7 @@ import Clientes from './views/Clientes'
 import Perfil from './views/Perfil'
 import Veiculos from './views/Veiculos'
 import AddCliente from './views/AddCliente'
+import DetalheVeiculos from './views/DetalheVeiculos'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/veiculos',
       name: 'veiculos',
       component: Veiculos
+    },
+    {
+      path: '/detalhes/veiculos/:id',
+      name: 'detalheVeiculos',
+      component: DetalheVeiculos
     }
   ]
 })

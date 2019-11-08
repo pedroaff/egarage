@@ -27,7 +27,7 @@ export default {
       this.params = this.$route.params
   },
   mounted () {
-    axios({ method: 'GET', 'url': 'http://localhost:8080/usuarios/' + this.params.id }).then(result => {
+    axios.get('http://localhost:8080/usuarios/' + this.params.id).then(result => {
       this.usuario = result.data
       console.log(this.usuario)
       console.log(this.params.id)

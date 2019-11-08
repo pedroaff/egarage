@@ -1,8 +1,8 @@
 <template>
   <div>
         <b-table striped hover :items="veiculos" :fields="fields">
-          <template slot="nome" slot-scope="data">
-            <router-link :to="`/veiculos/${data.item.id}`">
+          <template slot="id" slot-scope="data">
+            <router-link :to="`detalhes/veiculos/${data.item.id}`">
               {{ data.value }}
             </router-link>
           </template>
@@ -41,7 +41,7 @@ export default {
     }
   },
   mounted () {
-    axios({ method: 'GET', 'url': 'http://localhost:8080/veiculos' }).then(result => {
+    axios.get('http://localhost:8080/veiculos').then(result => {
       this.veiculos = result.data
       console.log('foi')
     }, error => {
