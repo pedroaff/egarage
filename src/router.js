@@ -9,6 +9,7 @@ import Veiculos from './views/Veiculos'
 import AddCliente from './views/AddCliente'
 import DetalheVeiculos from './views/DetalheVeiculos'
 import AddVeiculo from './views/AddVeiculo'
+import Ocorrencias from './views/Ocorrencias'
 
 Vue.use(Router)
 
@@ -60,6 +61,11 @@ export default new Router({
       path: '/veiculos/criar',
       name: 'addVeiculo',
       component: AddVeiculo
+    },
+    {
+      path: '/ocorrencias',
+      name: 'ocorrencias',
+      component: Ocorrencias
     }
   ]
 })
