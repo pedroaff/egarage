@@ -7,6 +7,11 @@
             </router-link>
           </template>
         </b-table>
+    <div>
+        <router-link to="/clientes/criar">
+            <b-button variant="primary">Criar cliente</b-button>
+        </router-link>
+    </div>
   </div>
 </template>
 
