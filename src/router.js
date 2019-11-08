@@ -5,6 +5,7 @@ import About from './views/About'
 import Funcionarios from './views/Funcionarios'
 import Clientes from './views/Clientes'
 import Perfil from './views/Perfil'
+import Veiculos from './views/Veiculos'
 import AddCliente from './views/AddCliente'
 
 Vue.use(Router)
@@ -42,6 +43,11 @@ export default new Router({
       path: '/clientes/criar',
       name: 'addCliente',
       component: AddCliente
+    },
+    {
+      path: '/veiculos',
+      name: 'veiculos',
+      component: Veiculos
     }
   ]
 })
