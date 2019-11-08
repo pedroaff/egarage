@@ -2,7 +2,7 @@
   <div>
         <b-table striped hover :items="usuarios" :fields="fields">
           <template slot="nome" slot-scope="data">
-            <router-link :to="`/perfil/clientes/${data.index}`">
+            <router-link :to="`/perfil/clientes/${data.item.id}`">
               {{ data.value }}
             </router-link>
           </template>

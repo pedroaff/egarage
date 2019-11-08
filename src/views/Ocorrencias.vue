@@ -1,6 +1,11 @@
 <template>
   <div>
         <b-table striped hover :items="veiculos" :fields="fields">
+            <template slot="id" slot-scope="data">
+            <router-link :to="`/detalhes/ocorrencias/${data.item.id}`">
+              {{ data.value }}
+            </router-link>
+          </template>
         </b-table>
     <div>
         <router-link to="/ocorrencias/criar">
