@@ -7,7 +7,9 @@
       <router-link to="/clientes">Clientes</router-link> |
       <router-link to="/perfil">Perfil</router-link>
     </div>
-    <router-view/>
+    <b-container>
+      <router-view/>
+    </b-container>
   </div>
 </template>
 
