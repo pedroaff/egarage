@@ -24,7 +24,7 @@ export default new Router({
       component: About
     },
     {
-      path: '/perfil/:id',
+      path: '/perfil/:tipo/:id',
       name: 'perfil',
       component: Perfil
     },
