@@ -24,7 +24,7 @@
         label="Email"
         label-for="input-horizontal"
       >
-          <b-form-input v-model="form.email"></b-form-input>
+          <b-form-input type="email" v-model="form.email"></b-form-input>
           
         </b-form-group>
       </b-col>
@@ -50,7 +50,7 @@
         label="CPF"
         label-for="input-horizontal"
       >
-          <b-form-input v-model="form.cpf"></b-form-input>
+          <b-form-input v-mask="'###.###.###-##'" v-model="form.cpf"></b-form-input>
           
         </b-form-group>
       </b-col>
@@ -63,7 +63,7 @@
         label="Telefone"
         label-for="input-horizontal"
       >
-          <b-form-input v-model="form.telefone"></b-form-input>
+          <b-form-input v-mask="'(##) #####-####'" v-model="form.telefone"></b-form-input>
           
         </b-form-group>
       </b-col>
@@ -76,7 +76,7 @@
         label="CEP"
         label-for="input-horizontal"
       >
-          <b-form-input v-model="form.cep"></b-form-input>
+          <b-form-input v-mask="'#####-###'" v-model="form.cep"></b-form-input>
           
         </b-form-group>
       </b-col>
@@ -107,6 +107,7 @@
         </b-form-group>
       </b-col>
 
+
       <b-button class="float-left m-3" type="submit" variant="primary">Salvar</b-button>
 
       <router-link :to="`/usuarios/`">
@@ -121,6 +122,7 @@
 
 <script>
 import axios from 'axios'
+import {mask} from 'vue-the-mask'
 
   export default {
     data() {
@@ -138,6 +140,7 @@ import axios from 'axios'
           },
       }
     },
+    directives: {mask},
     computed: {
       validation() {
         return this.form.nome.length > 4 && this.form.nome.length < 13
