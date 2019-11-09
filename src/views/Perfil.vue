@@ -34,7 +34,7 @@
             </tr>
           </tbody>
         </table>
-        <router-link :to="`/clientes/`">
+        <router-link :to="`/usuarios/`">
           <b-button class="float-left mr-2" variant="primary" size="sm">
                 Voltar
           </b-button>

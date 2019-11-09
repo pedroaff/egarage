@@ -1,26 +1,105 @@
 <template>
     <div>
-        <h1>Detalhes da ocorrência</h1>
-        <p>{{ this.ocorrencia.id }}</p>
-        <p>{{ this.ocorrencia.titulo }}</p>
-        <p>{{ this.ocorrencia.descricao }}</p>
-        <p>{{ this.ocorrencia.inicio }}</p>
-        <p>{{ this.ocorrencia.fim }}</p>
-        <p>{{ this.ocorrencia.veiculo.id }}</p>
-        <p>{{ this.ocorrencia.veiculo.placa }}</p>
-        <p>{{ this.ocorrencia.veiculo.marca }}</p>
-        <p>{{ this.ocorrencia.veiculo.modelo }}</p>
-        <p>{{ this.ocorrencia.veiculo.ano }}</p>
-        <p>{{ this.ocorrencia.veiculo.tipo }}</p>
-        <p>{{ this.ocorrencia.usuario.id }}</p>
-        <p>{{ this.ocorrencia.usuario.nome }}</p>
-        <p>{{ this.ocorrencia.usuario.email }}</p>
-        <p>{{ this.ocorrencia.usuario.telefone }}</p>
-        <p>{{ this.ocorrencia.usuario.cpf }}</p>
-        <p>{{ this.ocorrencia.usuario.logradouro }}</p>
-        <p>{{ this.ocorrencia.usuario.complemento }}</p>
-        <p>{{ this.ocorrencia.usuario.cep }}</p>
-        <p></p>
+        <h1 align="left">Detalhes da ocorrência</h1>
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <b>Informações gerais</b>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Id </td>
+              <td>{{ this.ocorrencia.id }}</td>
+            </tr>
+            <tr>
+              <td>Título </td>
+              <td>{{ this.ocorrencia.titulo }}</td>
+            </tr>
+            <tr>
+              <td>Descrição </td>
+              <td>{{ this.ocorrencia.descricao }}</td>
+            </tr>
+            <tr>
+              <td>Início </td>
+              <td>{{ this.ocorrencia.inicio }}</td>
+            </tr>
+            <tr>
+              <td>Está ativa?</td>
+              <td>{{ this.ocorrencia.fim }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <b>Veículo da ocorrência</b>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Id </td>
+              <td>{{ this.ocorrencia.veiculo.id }}</td>
+            </tr>
+            <tr>
+              <td>Placa </td>
+              <td>{{ this.ocorrencia.veiculo.placa }}</td>
+            </tr>
+            <tr>
+              <td>Marca </td>
+              <td>{{ this.ocorrencia.veiculo.marca }}</td>
+            </tr>
+            <tr>
+              <td>Ano </td>
+              <td>{{ this.ocorrencia.veiculo.ano }}</td>
+            </tr>
+            <tr>
+              <td>Modelo </td>
+              <td>{{ this.ocorrencia.veiculo.modelo }}</td>
+            </tr>
+            <tr>
+              <td>Tipo </td>
+              <td>{{ this.ocorrencia.veiculo.tipo }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <b>Usuário da ocorrência</b>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Id </td>
+              <td>{{ this.ocorrencia.usuario.id }}</td>
+            </tr>
+            <tr>
+              <td>Nome </td>
+              <td>{{ this.ocorrencia.usuario.nome }}</td>
+            </tr>
+            <tr>
+              <td>Email </td>
+              <td>{{ this.ocorrencia.usuario.email }}</td>
+            </tr>
+            <tr>
+              <td>Telefone </td>
+              <td>{{ this.ocorrencia.usuario.telefone }}</td>
+            </tr>
+            <tr>
+              <td>Cpf </td>
+              <td>{{ this.ocorrencia.usuario.cpf }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <router-link :to="`/ocorrencias/`">
+          <b-button class="float-left mr-2" variant="primary" size="sm">
+                Voltar
+          </b-button>
+        </router-link>
     </div>
 </template>
 

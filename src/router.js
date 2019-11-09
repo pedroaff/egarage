@@ -64,7 +64,7 @@ export default new Router({
       component: Ocorrencias
     },
     {
-      path: '/detalhes/ocorrencias/:id',
+      path: '/ocorrencias/:id',
       name: 'detalheOcorrencias',
       component: DetalheOcorrencias
     },
