@@ -21,11 +21,9 @@
                 Detalhes
               </b-button>
             </router-link>
-            <router-link :to="`detalhes/veiculos/${data.item.id}`">
-              <b-button variant="danger" size="sm" class="mr-2">
-                Remover
-              </b-button>
-            </router-link>
+            <b-button variant="danger" @click="onRemove(data.item.id)" size="sm" class="mr-2">
+              Remover
+            </b-button>
           </template>
 
         </b-table>
@@ -94,12 +92,24 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://localhost:8080/veiculos').then(result => {
+    this.veiculos = this.getVehicles()
+  },
+  methods: {
+      onRemove(id) {
+        axios.delete('http://localhost:8080/veiculos/' + id).then(result => {
+        this.veiculos = result.data
+        this.getVehicles()
+      }, error => {
+        console.error(error)
+      })
+    },
+    getVehicles() {
+      axios.get('http://localhost:8080/veiculos').then(result => {
       this.veiculos = result.data
-      console.log('foi')
-    }, error => {
-      console.error(error)
-    })
+      }, error => {
+        console.error(error)
+      })
+    }
   }
 }
 </script>
