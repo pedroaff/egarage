@@ -14,11 +14,20 @@
           :sort-by.sync="sortBy"
           :sort-desc.sync="sortDesc"
           >
-          <template slot="id" slot-scope="data">
+
+          <template v-slot:cell(options)="data">
             <router-link :to="`detalhes/veiculos/${data.item.id}`">
-              {{ data.value }}
+              <b-button variant="primary" size="sm" class="mr-2">
+                Detalhes
+              </b-button>
+            </router-link>
+            <router-link :to="`detalhes/veiculos/${data.item.id}`">
+              <b-button variant="danger" size="sm" class="mr-2">
+                Remover
+              </b-button>
             </router-link>
           </template>
+
         </b-table>
         <b-pagination
           align="center"
@@ -48,6 +57,10 @@ export default {
           sortable: true
         },
         {
+          key: 'placa',
+          sortable: true
+        },
+        {
           key: 'ano',
           sortable: true
         },
@@ -62,7 +75,8 @@ export default {
         {
           key: 'tipo',
           sortable: true
-        }
+        },
+        'options'
       ],
       veiculos: [],
       perPage: 10,
