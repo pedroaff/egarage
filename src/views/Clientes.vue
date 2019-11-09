@@ -1,13 +1,35 @@
 <template>
   <div>
     <h1>Usuários do sistema</h1>
-        <b-table striped hover :items="usuarios" :fields="fields">
-          <template slot="nome" slot-scope="data">
+        <b-table 
+        striped hover 
+        :items="usuarios" 
+        :fields="fields"
+        :perPage="perPage"
+        :current-page="currentPage"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc">
+
+          <template v-slot:cell(actions)="data">
             <router-link :to="`/perfil/clientes/${data.item.id}`">
-              {{ data.value }}
+              <b-button variant="primary" size="sm" class="mr-2">
+                Detalhes
+              </b-button>
             </router-link>
+            <b-button variant="danger" @click="onRemove(data.item.id)" size="sm" class="mr-2">
+              Remover
+            </b-button>
           </template>
+
         </b-table>
+
+        <b-pagination
+          align="center"
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="my-table"
+        ></b-pagination>
     <div>
         <router-link to="/clientes/criar">
             <b-button class="float-left" variant="primary">Criar cliente</b-button>
@@ -37,18 +59,43 @@ export default {
         {
           key: 'tipo',
           sortable: true
-        }
+        },
+        { 
+          key: 'actions', 
+          label: 'Ações' 
+        },
       ],
-      usuarios: []
+      usuarios: [],
+      perPage: 10,
+      sortBy: 'id',
+      sortDesc: true,
+      currentPage: 1,
+    }
+  },
+  computed: {
+    rows() {
+      return this.usuarios.length
     }
   },
   mounted () {
-    axios({ method: 'GET', 'url': 'http://localhost:8080/usuarios' }).then(result => {
+    this.usuarios = this.getUsers()
+  },
+  methods: {
+    onRemove(id) {
+        axios.delete('http://localhost:8080/usuarios/' + id).then(result => {
+        this.usuarios = result.data
+        this.getUsers()
+      }, error => {
+        console.error(error)
+      })
+    },
+    getUsers() {
+      axios.get('http://localhost:8080/usuarios').then(result => {
       this.usuarios = result.data
-      console.log('foi')
-    }, error => {
-      console.error(error)
-    })
+      }, error => {
+        console.error(error)
+      })
+    }
   }
 }
 </script>
