@@ -1,17 +1,10 @@
 <template>
-  <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/clientes">Clientes</router-link> |
-      <router-link to="/veiculos">Veículos</router-link> |
-      <router-link to="/ocorrencias">Ocorrências</router-link> |
-      <router-link to="/perfil">Perfil</router-link>
-    </div> -->
+  <div id="app" class="d-flex flex-column h-100">
     <Navbar></Navbar>
     <b-container>
       <router-view/>
     </b-container>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -22,15 +15,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>

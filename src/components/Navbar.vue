@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="nav">
         <b-navbar toggleable="lg" type="dark" variant="info">
             <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
@@ -21,14 +21,7 @@
                     <b-dropdown-item href="#">Aumento de fontes</b-dropdown-item>
                 </b-nav-item-dropdown>
 
-                <b-nav-item-dropdown right>
-                <!-- Using 'button-content' slot -->
-                <template v-slot:button-content>
-                    <em>Logout</em>
-                </template>
-                <b-dropdown-item href="#">Profile</b-dropdown-item>
-                <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-                </b-nav-item-dropdown>
+                <b-nav-item router-link to="/logout">Logout</b-nav-item>
             </b-navbar-nav>
             </b-collapse>
         </b-navbar>
@@ -40,3 +33,13 @@ export default {
     name: "Navbar"
 }
 </script>
+
+<style lang="scss">
+#nav {
+  a {
+    &.router-link-exact-active {
+      color: white;
+    }
+  }
+}
+</style>

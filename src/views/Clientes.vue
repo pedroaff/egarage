@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Usuários do sistema</h1>
         <b-table striped hover :items="usuarios" :fields="fields">
           <template slot="nome" slot-scope="data">
             <router-link :to="`/perfil/clientes/${data.item.id}`">
