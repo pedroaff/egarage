@@ -1,9 +1,10 @@
 <template>
 <div>
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">E-garage. 2019</span>
-        </div>
+    <footer class="text-muted fixed-bottom">
+      <div class="container">
+        <p>Album example is © E-garage, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+      </div>
     </footer>
 </div>
 </template>
@@ -15,15 +16,12 @@ export default {
 </script>
 
 <style scoped>
+.fixed-bottom {
+    background-color: black
+}
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
-  background-color: #f5f5f5;
+.text-muted {
+    color: white !important;
 }
 
 </style>

@@ -1,12 +1,35 @@
 <template>
   <div>
-        <b-table striped hover :items="veiculos" :fields="fields">
-            <template slot="id" slot-scope="data">
+        <b-table striped hover 
+        :items="ocorrencias" 
+        :fields="fields"
+        :perPage="perPage"
+        :current-page="currentPage"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
+        >
+
+          <template v-slot:cell(actions)="data">
             <router-link :to="`/detalhes/ocorrencias/${data.item.id}`">
-              {{ data.value }}
+              <b-button variant="primary" size="sm" class="mr-2">
+                Detalhes
+              </b-button>
             </router-link>
+            <b-button variant="warning" @click="onClose(data.item.id)" size="sm" class="mr-2">
+              Encerrar
+            </b-button>
           </template>
+
         </b-table>
+
+        <b-pagination
+          align="center"
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="my-table"
+        ></b-pagination>
+
     <div>
         <router-link to="/ocorrencias/criar">
             <b-button class="float-left" variant="primary">Criar ocorrência</b-button>
@@ -36,18 +59,40 @@ export default {
         {
           key: 'fim',
           sortable: true
-        }
+        },
+        { 
+          key: 'actions', 
+          label: 'Ações' 
+        },
       ],
-      veiculos: []
+      ocorrencias: [],
+      perPage: 10,
+      sortBy: 'id',
+      sortDesc: true,
+      currentPage: 1,
+    }
+  },
+  computed: {
+    rows() {
+      return this.ocorrencias.length
     }
   },
   mounted () {
     axios.get('http://localhost:8080/ocorrencias').then(result => {
-      this.veiculos = result.data
+      this.ocorrencias = result.data
       console.log('foi')
     }, error => {
       console.error(error)
     })
+  },
+  methods: {
+    onClose(id) {
+        axios.put('http://localhost:8080/ocorrencias/encerrar/' + id).then(result => {
+        console.log(result.data)
+      }, error => {
+        console.error(error)
+      })
+    }
   }
 }
 </script>
