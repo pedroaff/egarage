@@ -15,7 +15,7 @@
           :sort-desc.sync="sortDesc"
           >
 
-          <template v-slot:cell(options)="data">
+          <template v-slot:cell(actions)="data">
             <router-link :to="`detalhes/veiculos/${data.item.id}`">
               <b-button variant="primary" size="sm" class="mr-2">
                 Detalhes
@@ -76,7 +76,10 @@ export default {
           key: 'tipo',
           sortable: true
         },
-        'options'
+        { 
+          key: 'actions', 
+          label: 'Ações' 
+        },
       ],
       veiculos: [],
       perPage: 10,
