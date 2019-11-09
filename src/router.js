@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About'
-import Funcionarios from './views/Funcionarios'
 import Clientes from './views/Clientes'
 import Perfil from './views/Perfil'
 import Veiculos from './views/Veiculos'
@@ -30,17 +29,12 @@ export default new Router({
       component: About
     },
     {
-      path: '/perfil/:tipo/:id',
+      path: '/usuarios/:id',
       name: 'perfil',
       component: Perfil
     },
     {
-      path: '/funcionarios',
-      name: 'funcionarios',
-      component: Funcionarios
-    },
-    {
-      path: '/clientes',
+      path: '/usuarios',
       name: 'clientes',
       component: Clientes
     },

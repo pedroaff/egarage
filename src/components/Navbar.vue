@@ -8,7 +8,7 @@
             <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
                 <b-nav-item router-link to="/">Home</b-nav-item>
-                <b-nav-item router-link to="/clientes">Clientes</b-nav-item>
+                <b-nav-item router-link to="/usuarios">Usuários</b-nav-item>
                 <b-nav-item router-link to="/veiculos">Veículos</b-nav-item>
                 <b-nav-item router-link to="/ocorrencias">Ocorrências</b-nav-item>
             </b-navbar-nav>
