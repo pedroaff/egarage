@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="d-flex flex-column h-100">
     <Navbar></Navbar>
-    <b-container>
+    <b-container style="margin-top: 15px">
       <router-view/>
     </b-container>
     <Footer></Footer>

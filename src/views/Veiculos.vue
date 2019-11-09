@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Veículos disponíveis</h1>
         <b-table striped hover :items="veiculos" :fields="fields">
           <template slot="id" slot-scope="data">
             <router-link :to="`detalhes/veiculos/${data.item.id}`">
