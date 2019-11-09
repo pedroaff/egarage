@@ -1,4 +1,4 @@
-# adopt-pets
+# e-garage
 
 ## Project setup
 ```
