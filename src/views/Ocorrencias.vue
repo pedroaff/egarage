@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1> Lista de Ocorrências</h1>
         <b-table striped hover 
         :items="ocorrencias" 
         :fields="fields"
@@ -70,6 +71,7 @@ export default {
       sortBy: 'id',
       sortDesc: true,
       currentPage: 1,
+      ocurrenceEntity: null,
     }
   },
   computed: {
@@ -87,12 +89,31 @@ export default {
   },
   methods: {
     onClose(id) {
-        axios.put('http://localhost:8080/ocorrencias/encerrar/' + id).then(result => {
-        console.log(result.data)
-      }, error => {
-        console.error(error)
-      })
+        console.log('entrando no onClose')
+        this.getOcurrenceEntity(id)
+            .then((response) => {
+              console.log(response)
+              axios.put('http://localhost:8080/ocorrencias/encerrar/' + id, {
+                  id: id
+                })
+            })
+            .catch((error) => {
+              console.error('deu erro porra')
+            })
+    },
+
+    getOcurrenceEntity(id) {
+      return axios      
+            .get('http://localhost:8080/ocorrencias/' + id)
+            .then((response) => {
+              console.log('dentro do getOcurrenceEntity')
+              return JSON.stringify(response.data)
+            })
+            .catch((error) => {
+              console.error('deu erro porra 1')
+            })
     }
+
   }
 }
 </script>
