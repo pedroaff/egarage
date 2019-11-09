@@ -16,7 +16,7 @@
           >
 
           <template v-slot:cell(actions)="data">
-            <router-link :to="`detalhes/veiculos/${data.item.id}`">
+            <router-link :to="`detalhes/${data.item.id}`">
               <b-button variant="primary" size="sm" class="mr-2">
                 Detalhes
               </b-button>

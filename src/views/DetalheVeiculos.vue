@@ -1,14 +1,40 @@
 <template>
     <div>
-        <h1>Detalhes do veículo</h1>
-        <p>{{ this.veiculo.id }}</p>
-        <p>{{ this.veiculo.placa }}</p>
-        <p>{{ this.veiculo.marca }}</p>
-        <p>{{ this.veiculo.modelo }}</p>
-        <p>{{ this.veiculo.ano }}</p>
-        <p>{{ this.veiculo.tipo }}</p>
-        <p>{{ this.veiculo.inativo }}</p>
-        <p></p>
+        <h1 align="left">Detalhes do veículo</h1>
+        <table class="table table-sm table-striped">
+          <tbody>
+            <tr>
+              <td>Id </td>
+              <td>{{ this.veiculo.id }}</td>
+            </tr>
+            <tr>
+              <td>Placa </td>
+              <td>{{ this.veiculo.placa }}</td>
+            </tr>
+            <tr>
+              <td>Marca </td>
+              <td>{{ this.veiculo.marca }}</td>
+            </tr>
+            <tr>
+              <td>Modelo </td>
+              <td>{{ this.veiculo.modelo }}</td>
+            </tr>
+            <tr>
+              <td>Ano </td>
+              <td>{{ this.veiculo.ano }}</td>
+            </tr>
+            <tr>
+              <td>Tipo </td>
+              <td>{{ this.veiculo.tipo }}</td>
+            </tr>
+
+          </tbody>
+        </table>
+        <router-link :to="`/veiculos/`">
+          <b-button class="float-left mr-2" variant="primary" size="sm">
+                Voltar
+          </b-button>
+        </router-link>
     </div>
 </template>
 

@@ -55,7 +55,7 @@ export default new Router({
       component: Veiculos
     },
     {
-      path: '/detalhes/veiculos/:id',
+      path: '/veiculos/detalhes/:id',
       name: 'detalheVeiculos',
       component: DetalheVeiculos
     },
