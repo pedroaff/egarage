@@ -147,7 +147,7 @@ import axios from 'axios'
             //     .then((resp) => console.log(resp))
             //     .catch((err) => console.log(err))
             // }
-            axios.post('http://localhost:8080/ocorrencia', {
+            axios.post('http://localhost:8080/ocorrencias', {
                 titulo: this.form.titulo,
                 descricao: this.form.descricao,
                 fim: this.form.fim,
