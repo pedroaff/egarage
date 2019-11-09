@@ -10,6 +10,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
+Vue.component('Navbar', require('./components/Navbar.vue').default)
+
 
 new Vue({
   router,

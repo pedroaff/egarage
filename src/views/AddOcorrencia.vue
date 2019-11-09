@@ -130,6 +130,23 @@ import axios from 'axios'
         onSubmit() {
             console.log(this.selectedVeiculo, this.selectedCliente)
             let formData = JSON.stringify(this.form, this.selectedCliente)
+
+            // fetch('http://localhost:8080/ocorrencia', {
+            //     method: 'POST',
+            //     headers: new Headers({
+            //         "Content-Type": "application/json",
+            //     }),
+            //     body:JSON.stringify({
+            //         titulo: this.form.titulo,
+            //         descricao: this.form.descricao,
+            //         fim: this.form.fim,
+            //         veiculo_id: this.selectedVeiculo,
+            //         usuario_id: this.selectedCliente,
+            //         id: ""})
+            //     })
+            //     .then((resp) => console.log(resp))
+            //     .catch((err) => console.log(err))
+            // }
             axios.post('http://localhost:8080/ocorrencia', {
                 titulo: this.form.titulo,
                 descricao: this.form.descricao,
@@ -138,7 +155,7 @@ import axios from 'axios'
                 usuario_id: this.selectedCliente,
                 id: ""
             }).then(function (response) {
-                console.log(response)
+                console.log(response.data)
             }).catch(function (error) {
                 console.log(error)
             })
