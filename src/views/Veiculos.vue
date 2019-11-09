@@ -1,17 +1,38 @@
 <template>
   <div>
-    <h1>Veículos disponíveis</h1>
-        <b-table striped hover :items="veiculos" :fields="fields">
+    <h1>Lista de veículos disponíveis</h1>
+    <div class="overflow-auto">
+        
+
+        <b-table 
+          striped hover 
+          id="my-table"
+          :items="veiculos" 
+          :fields="fields" 
+          :perPage="perPage"
+          :current-page="currentPage"
+          :sort-by.sync="sortBy"
+          :sort-desc.sync="sortDesc"
+          >
           <template slot="id" slot-scope="data">
             <router-link :to="`detalhes/veiculos/${data.item.id}`">
               {{ data.value }}
             </router-link>
           </template>
         </b-table>
-    <div>
-        <router-link to="/veiculos/criar">
-            <b-button class="float-left" variant="primary">Criar veículo</b-button>
-        </router-link>
+        <b-pagination
+          align="center"
+          v-model="currentPage"
+          :total-rows="rows"
+          :per-page="perPage"
+          aria-controls="my-table"
+        ></b-pagination>
+
+      <div>
+          <router-link to="/veiculos/criar">
+              <b-button class="float-left" variant="primary">Criar veículo</b-button>
+          </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -43,7 +64,16 @@ export default {
           sortable: true
         }
       ],
-      veiculos: []
+      veiculos: [],
+      perPage: 10,
+      sortBy: 'id',
+      sortDesc: true,
+      currentPage: 1,
+    }
+  },
+  computed: {
+    rows() {
+      return this.veiculos.length
     }
   },
   mounted () {
