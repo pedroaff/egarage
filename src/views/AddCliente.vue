@@ -2,20 +2,35 @@
   <div>
     <h1 align="left">Criar novo cliente</h1>
     <br>
-    <b-form @submit="onSubmit" @submit.stop.prevent>
+    <b-form @submit.prevent="onSubmit" :disabled="$v.form.$invalid">
       <b-col sm="5">
         <b-form-group
         id="fieldset-horizontal"
         label-cols-sm="4"
         label-cols-lg="3"
         label="Nome"
-        label-for="input-horizontal"
-      >
-          <b-form-input v-model="form.nome"></b-form-input>
+        label-for="input-horizontal">
+
+          <b-form-input 
+          v-model.lazy="$v.form.nome.$model"
+          :class="{ 'is-invalid': $v.form.nome.$error }">
+          </b-form-input>
+          
+          <div 
+            v-if="!$v.form.nome.minLength" 
+            class="invalid-feedback">
+
+            O nome precisa ter pelo menos 3 caracteres
+          </div>
+
+          <div 
+            v-if="!$v.form.nome.required" 
+            class="invalid-feedback">
+            O nome é obrigatório
+          </div>
 
         </b-form-group>
-      </b-col>
-
+    </b-col>
       <b-col sm="5">
         <b-form-group
         id="fieldset-horizontal"
@@ -24,10 +39,20 @@
         label="Email"
         label-for="input-horizontal"
       >
-          <b-form-input type="email" v-model="form.email"></b-form-input>
-          
+          <b-form-input 
+          type="email" 
+          v-model.lazy="$v.form.email.$model" 
+          :class="{ 'is-invalid': $v.form.email.$error }"></b-form-input>
+
+          <div 
+            v-if="!$v.form.email.required" 
+            class="invalid-feedback">
+            O email é obrigatório
+          </div>
+
         </b-form-group>
       </b-col>
+        
 
       <b-col sm="5">
         <b-form-group
@@ -35,8 +60,8 @@
         label-cols-sm="4"
         label-cols-lg="3"
         label="Senha"
-        label-for="input-horizontal"
-      >
+        label-for="input-horizontal">
+
           <b-form-input v-model="form.senha"></b-form-input>
           
         </b-form-group>
@@ -48,8 +73,7 @@
         label-cols-sm="4"
         label-cols-lg="3"
         label="CPF"
-        label-for="input-horizontal"
-      >
+        label-for="input-horizontal">
           <b-form-input v-mask="'###.###.###-##'" v-model="form.cpf"></b-form-input>
           
         </b-form-group>
@@ -61,8 +85,8 @@
         label-cols-sm="4"
         label-cols-lg="3"
         label="Telefone"
-        label-for="input-horizontal"
-      >
+        label-for="input-horizontal">
+
           <b-form-input v-mask="'(##) #####-####'" v-model="form.telefone"></b-form-input>
           
         </b-form-group>
@@ -74,8 +98,8 @@
         label-cols-sm="4"
         label-cols-lg="3"
         label="CEP"
-        label-for="input-horizontal"
-      >
+        label-for="input-horizontal">
+
           <b-form-input v-mask="'#####-###'" v-model="form.cep"></b-form-input>
           
         </b-form-group>
@@ -87,8 +111,8 @@
         label-cols-sm="4"
         label-cols-lg="3"
         label="Logradouro"
-        label-for="input-horizontal"
-      >
+        label-for="input-horizontal">
+
           <b-form-input v-model="form.logradouro"></b-form-input>
           
         </b-form-group>
@@ -100,15 +124,18 @@
         label-cols-sm="4"
         label-cols-lg="3"
         label="Complemento"
-        label-for="input-horizontal"
-      >
+        label-for="complemento">
+
           <b-form-input v-model="form.complemento"></b-form-input>
           
         </b-form-group>
       </b-col>
 
-
-      <b-button class="float-left m-3" type="submit" variant="primary">Salvar</b-button>
+      <b-button 
+        class="float-left m-3" 
+        type="submit" 
+        :disabled="$v.form.$invalid" 
+        variant="primary">Salvar</b-button>
 
       <router-link :to="`/usuarios/`">
           <b-button class="float-left mr-2 m-3" variant="danger">
@@ -123,6 +150,7 @@
 <script>
 import axios from 'axios'
 import {mask} from 'vue-the-mask'
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 
   export default {
     data() {
@@ -140,6 +168,12 @@ import {mask} from 'vue-the-mask'
           },
       }
     },
+    validations: {
+      form: {
+          nome: { required, minLength: minLength(4) },
+          email: { required } 
+      },
+    },
     directives: {mask},
     computed: {
       validation() {
@@ -148,8 +182,6 @@ import {mask} from 'vue-the-mask'
     },
     methods: {
         onSubmit() {
-            console.log(JSON.stringify(this.form))
-
             axios.post('http://localhost:8080/usuarios', {
                 nome: this.form.nome,
                 email: this.form.email,

@@ -91,10 +91,10 @@ export default {
     onClose(id) {
         console.log('entrando no onClose')
         this.getOcurrenceEntity(id)
-            .then((response) => {
+            .then(response => {
               console.log(response)
               axios.put('http://localhost:8080/ocorrencias/encerrar/' + id, {
-                  id: id
+                  response
                 })
             })
             .catch((error) => {
