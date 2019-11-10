@@ -43,7 +43,7 @@
           label="Veículos"
           label-for="input-horizontal">
 
-          <select v-model='selectedVeiculo' class='form-control'>
+          <select v-model='selectedVeiculo' @change="onChangeVeiculo($event)" class='form-control'>
               <option 
               :key="veiculo.id" 
               v-for='veiculo in veiculos' 
@@ -61,7 +61,7 @@
             label="Usuário"
             label-for="input-horizontal">
 
-            <select class='form-control' v-model='selectedCliente'>
+            <select class='form-control' @change="onChangeUsuario($event)" v-model='selectedCliente'>
                 <option 
                 :key="cliente.id" 
                 v-for='cliente in clientes' 
@@ -159,21 +159,43 @@ import {mask} from 'vue-the-mask'
     },
     methods: {
         onSubmit() {
-            axios.post('http://localhost:8080/ocorrencias', {
-                titulo: this.form.titulo,
-                descricao: this.form.descricao,
-                fim: this.form.fim,
-                veiculo: this.veiculo,
-                usuario: this.user,
-                id: ""
-            })
-            .then(response => {
-                window.location.href = "http://localhost:8081/ocorrencias"
-            })
-            .catch(error => {
-                console.log(error)
-            })
+          let usuario = "http://localhost:8080/usuarios/"
+          let veiculo = "http://localhost:8080/veiculos/"
+          let ocorrencia = "http://localhost:8080/ocorrencias"
+
+
+          axios
+               .get(usuario + this.selectedCliente)
+               .then(res => {
+                this.user = res.data 
+                console.log('setando usuario', this.usuario)
+                return axios.get(veiculo + this.selectedVeiculo)
+               })
+               .then(res => {
+                 this.veiculo = res.data
+                 console.log('setando veiculo', this.veiculo)
+                 return axios.post(ocorrencia, {
+                    titulo: this.form.titulo,
+                    descricao: this.form.descricao,
+                    fim: this.form.fim,
+                    veiculo: this.veiculo,
+                    usuario: this.user,
+                    id: ""
+                 })
+               })
+               .then(res => {
+                 window.location.href = "http://localhost:8081/ocorrencias"
+               })
+               .catch(error => {
+                 console.log(error)
+               })
         },
+        onChangeVeiculo() {
+          this.selectedVeiculo = event.target.value
+        },
+        onChangeUsuario() {
+          this.selectedCliente = event.target.value
+        }
     }
   }
 </script>

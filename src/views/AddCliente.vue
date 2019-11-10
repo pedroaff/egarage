@@ -12,7 +12,6 @@
         label-for="input-horizontal">
 
           <b-form-input 
-          type="text"
           v-model.lazy="$v.form.nome.$model"
           :class="{ 'is-invalid': $v.form.nome.$error }">
           </b-form-input>
@@ -41,7 +40,6 @@
         label-for="input-horizontal"
       >
           <b-form-input 
-          type="email" 
           v-model.lazy="$v.form.email.$model" 
           :class="{ 'is-invalid': $v.form.email.$error }"></b-form-input>
 
@@ -76,7 +74,6 @@
         label-for="input-horizontal">
 
           <b-form-input 
-          type="email "
           :class="{ 'is-invalid': $v.form.senha.$error }" 
           v-model.lazy="$v.form.senha.$model">
           </b-form-input>

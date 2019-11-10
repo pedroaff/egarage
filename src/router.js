@@ -10,6 +10,7 @@ import AddVeiculo from './views/AddVeiculo'
 import Ocorrencias from './views/Ocorrencias'
 import DetalheOcorrencias from './views/DetalheOcorrencias'
 import AddOcorrencia from './views/AddOcorrencia'
+import Login from './views/Login'
 
 Vue.use(Router)
 
@@ -21,6 +22,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/usuarios/:id',
