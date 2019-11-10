@@ -215,7 +215,9 @@
         class="float-left m-3" 
         type="submit" 
         :disabled="$v.form.$invalid" 
-        variant="primary">Salvar</b-button>
+        variant="primary">
+        Salvar
+      </b-button>
 
       <router-link :to="`/usuarios/`">
           <b-button class="float-left mr-2 m-3" variant="danger">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Registrar ocorrência</h1>
-    <b-form @submit="onSubmit" @submit.stop.prevent>
+    <b-form @submit.prevent="onSubmit" :disabled="$v.form.$invalid">
     
       <b-form-group
       id="fieldset-horizontal"
@@ -10,7 +10,10 @@
       label="Título"
       label-for="input-horizontal"
     >
-        <b-form-input v-model="form.titulo"></b-form-input>
+        <b-form-input 
+        :maxlength="20"
+        v-model.lazy="$v.form.titulo.$model">
+        </b-form-input>
 
       </b-form-group>
 
@@ -19,52 +22,36 @@
       label-cols-sm="4"
       label-cols-lg="3"
       label="Descrição"
-      label-for="input-horizontal"
-    >
+      label-for="input-horizontal">
+
         <b-form-textarea 
         id="textarea"
         placeholder="Descreva a ocorrência..."
         rows="3"
+        :maxlength="250"
         max-rows="6"
-        v-model="form.descricao">
+        v-model.lazy="$v.form.descricao.$model">
         </b-form-textarea>
         
       </b-form-group>
 
-      <b-form-group
-      id="fieldset-horizontal"
-      label-cols-sm="4"
-      label-cols-lg="3"
-      label="Início"
-      label-for="input-horizontal"
-    >
-        <b-form-input type="date" v-model="form.inicio"></b-form-input>
-        
-      </b-form-group>
-
 
       <b-form-group
-      id="fieldset-horizontal"
-      label-cols-sm="4"
-      label-cols-lg="3"
-      label="Fim"
-      label-for="input-horizontal"
-    >
-        <b-form-input type="date" v-model="form.fim"></b-form-input>
-        
-      </b-form-group>
+          id="fieldset-horizontal"
+          label-cols-sm="4"
+          label-cols-lg="3"
+          label="Veículos"
+          label-for="input-horizontal">
 
-        <b-form-group
-            id="fieldset-horizontal"
-            label-cols-sm="4"
-            label-cols-lg="3"
-            label="Veículos"
-            label-for="input-horizontal"
-        >
-            <select v-model='selectedVeiculo' class='form-control'>
-                <option value='0' >Selecione um veículo</option>
-                <option :key="veiculo.id" v-for='veiculo in veiculos' :value='veiculo.id'>{{ veiculo.marca }}</option>
-            </select>
+          <select v-model='selectedVeiculo' class='form-control'>
+              <option 
+              :key="veiculo.id" 
+              v-for='veiculo in veiculos' 
+              :value='veiculo.id'>
+                {{ veiculo.marca }}
+              </option>
+          </select>
+
         </b-form-group>
 
         <b-form-group
@@ -72,22 +59,35 @@
             label-cols-sm="4"
             label-cols-lg="3"
             label="Usuário"
-            label-for="input-horizontal"
-        >
+            label-for="input-horizontal">
+
             <select class='form-control' v-model='selectedCliente'>
-                <option value='0' >Selecione um cliente</option>
-                <option :key="cliente.id" v-for='cliente in clientes' :value='cliente.id'>{{ cliente.nome }}</option>
+                <option 
+                :key="cliente.id" 
+                v-for='cliente in clientes' 
+                :value='cliente.id'>
+                  {{ cliente.nome }}
+                </option>
             </select>
+
         </b-form-group>
         
+        <b-button 
+          class="float-left" 
+          type="submit" 
+          variant="primary"
+          :disabled="$v.form.$invalid">
+          Salvar
+        </b-button>
 
-        <b-button class="float-left" type="submit" variant="primary">Salvar</b-button>
      </b-form>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { required, email, minLength, sameAs, maxLength } from "vuelidate/lib/validators";
+import {mask} from 'vue-the-mask'
 
   export default {
     data() {
@@ -105,62 +105,69 @@ import axios from 'axios'
           },
           selectedVeiculo: null,
           selectedCliente: null,
+          user: null,
+          veiculo: null,
       }
     },
+    validations: {
+      form: {
+        titulo: { required },
+        descricao: { required }
+      }
+    },
+    directives: {mask},
     computed: {
       validation() {
         return this.form.titulo.length > 4 && this.form.titulo.length < 13
       }
     },
     mounted () {
-        axios({ method: 'GET', 'url': 'http://localhost:8080/veiculos' }).then(result => {
-        this.veiculos = result.data
-        console.log(this.veiculos)
-        }, error => {
-        console.error(error)
-        })
 
-        axios({ method: 'GET', 'url': 'http://localhost:8080/usuarios' }).then(result => {
-        this.clientes = result.data
-        console.log(this.clientes)
-        }, error => {
-        console.error(error)
-        })
+       let usuarios = "http://localhost:8080/usuarios"
+       let usuario = "http://localhost:8080/usuarios/"
+       let veiculos = "http://localhost:8080/veiculos"
+       let veiculo = "http://localhost:8080/veiculos/"
+
+       axios
+            .get(usuarios)
+            .then(res => {
+              this.clientes = res.data
+              return axios.get(usuario + res.data[0].id)
+            })
+            .then(res => {
+              this.user = res.data
+              this.selectedCliente = this.user.id
+            })
+      
+      axios
+           .get(veiculos)
+           .then(res => {
+             this.veiculos = res.data
+             return axios.get(veiculo + res.data[0].id)
+           })
+           .then(res => {
+             this.veiculo = res.data
+             this.selectedVeiculo = this.veiculo.id
+           })
+    
     },
     methods: {
         onSubmit() {
-            console.log(this.selectedVeiculo, this.selectedCliente)
-            let formData = JSON.stringify(this.form, this.selectedCliente)
-
-            // fetch('http://localhost:8080/ocorrencia', {
-            //     method: 'POST',
-            //     headers: new Headers({
-            //         "Content-Type": "application/json",
-            //     }),
-            //     body:JSON.stringify({
-            //         titulo: this.form.titulo,
-            //         descricao: this.form.descricao,
-            //         fim: this.form.fim,
-            //         veiculo_id: this.selectedVeiculo,
-            //         usuario_id: this.selectedCliente,
-            //         id: ""})
-            //     })
-            //     .then((resp) => console.log(resp))
-            //     .catch((err) => console.log(err))
-            // }
             axios.post('http://localhost:8080/ocorrencias', {
                 titulo: this.form.titulo,
                 descricao: this.form.descricao,
                 fim: this.form.fim,
-                veiculo_id: this.selectedVeiculo,
-                usuario_id: this.selectedCliente,
+                veiculo: this.veiculo,
+                usuario: this.user,
                 id: ""
-            }).then(function (response) {
-                console.log(response.data)
-            }).catch(function (error) {
+            })
+            .then(response => {
+                window.location.href = "http://localhost:8081/ocorrencias"
+            })
+            .catch(error => {
                 console.log(error)
             })
-        }
+        },
     }
   }
 </script>
