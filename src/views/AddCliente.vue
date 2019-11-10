@@ -161,7 +161,7 @@ import {mask} from 'vue-the-mask'
                 complemento: this.form.complemento,
                 tipo: this.form.tipo,
             }).then(function (response) {
-                console.log(response)
+                window.location.href = "http://localhost:8081/usuarios"
             }).catch(function (error) {
                 console.log(error)
             })
