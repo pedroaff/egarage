@@ -1,12 +1,14 @@
 <template>
-<div>
-    <footer class="text-muted fixed-bottom">
+
       <div class="container">
-        <p>Album example is © E-garage, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+
+        <footer>
+          <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+          <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+        </footer>
+
       </div>
-    </footer>
-</div>
+    
 </template>
 
 <script>
@@ -16,12 +18,22 @@ export default {
 </script>
 
 <style scoped>
-.fixed-bottom {
+.text-muted {
     background-color: black
 }
 
 .text-muted {
     color: white !important;
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }
 
 </style>
