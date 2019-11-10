@@ -36,7 +36,7 @@
         ></b-pagination>
 
       <div>
-          <router-link to="/veiculos/criar">
+          <router-link to="/criar/veiculo/">
               <b-button class="float-left" variant="primary">Criar veículo</b-button>
           </router-link>
       </div>
@@ -113,3 +113,9 @@ export default {
   }
 }
 </script>
+
+<style>
+tr td:first-child {
+    width: 1%;
+}
+</style>

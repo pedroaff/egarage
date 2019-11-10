@@ -48,7 +48,7 @@ export default new Router({
       component: DetalheVeiculos
     },
     {
-      path: '/veiculos/criar',
+      path: '/criar/veiculo/',
       name: 'addVeiculo',
       component: AddVeiculo
     },

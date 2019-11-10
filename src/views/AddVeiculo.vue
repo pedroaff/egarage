@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 align="left">Cadastrar veículo</h1>
     <b-form @submit="onSubmit" @submit.stop.prevent>
     
       <b-form-group
@@ -106,6 +107,9 @@ import axios from 'axios'
                 console.log(error)
             })
         } 
+    },
+    mounted() {
+      console.log('ai meu cu')
     }
   }
 </script>

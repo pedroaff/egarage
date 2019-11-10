@@ -117,3 +117,8 @@ export default {
   }
 }
 </script>
+<style>
+tr td:first-child {
+    width: 1%;
+}
+</style>

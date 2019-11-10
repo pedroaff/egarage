@@ -49,7 +49,6 @@ export default {
   },
   created () {
       this.params = this.$route.params
-      console.log('propertyComputed will update, as this.property is now reactive.')
   },
   mounted () {
     console.log(this.params)
