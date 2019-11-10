@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Registrar ocorrência</h1>
     <b-form @submit="onSubmit" @submit.stop.prevent>
     
       <b-form-group

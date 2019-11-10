@@ -32,7 +32,7 @@
         ></b-pagination>
 
     <div>
-        <router-link to="/ocorrencias/criar">
+        <router-link to="/criar/ocorrencias/">
             <b-button class="float-left" variant="primary">Criar ocorrência</b-button>
         </router-link>
     </div>

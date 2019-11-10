@@ -63,7 +63,7 @@ export default new Router({
       component: DetalheOcorrencias
     },
     {
-      path: '/ocorrencias/criar',
+      path: '/criar/ocorrencias/',
       name: 'addOcorrencia',
       component: AddOcorrencia
     }
