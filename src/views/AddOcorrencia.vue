@@ -48,7 +48,7 @@
               :key="veiculo.id" 
               v-for='veiculo in veiculos' 
               :value='veiculo.id'>
-                {{ veiculo.marca }}
+                {{ veiculo.marca }} : {{veiculo.placa}}
               </option>
           </select>
 
@@ -73,7 +73,7 @@
         </b-form-group>
         
         <b-button 
-          class="float-left" 
+          class="float-left m-3" 
           type="submit" 
           variant="primary"
           :disabled="$v.form.$invalid">
@@ -81,6 +81,12 @@
         </b-button>
 
      </b-form>
+
+     <router-link :to="`/ocorrencias/`">
+          <b-button class="float-left mr-2 m-3" variant="danger">
+                Voltar
+          </b-button>
+      </router-link>
   </div>
 </template>
 

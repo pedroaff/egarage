@@ -10,6 +10,27 @@
         :sort-desc.sync="sortDesc"
         >
 
+        <template v-slot:cell(envolvidos)="data">
+
+          <b class="text-info">
+            {{data.item.usuario.nome}} com {{data.item.veiculo.placa}}
+          </b>
+
+        </template>
+
+
+        <template v-slot:cell(status)="data">
+
+          <b v-if="data.item.fim" class="text-success">
+            Finalizada {{data.item.veiculo.placa}}
+          </b>
+          
+          <b v-if="!data.item.fim" class="text-warning">
+            Em andamento 
+          </b>
+
+        </template>
+
           <template v-slot:cell(actions)="data">
             <router-link :to="`/ocorrencias/${data.item.id}`">
               <b-button variant="primary" size="sm" class="mr-2">
@@ -54,12 +75,12 @@ export default {
           sortable: true
         },
         {
-          key: 'inicio',
-          sortable: true
+          key: 'envolvidos',
+          sortable: false
         },
         {
-          key: 'fim',
-          sortable: true
+          key: 'status',
+          sortable: false
         },
         { 
           key: 'actions', 
@@ -105,11 +126,11 @@ export default {
     getOcurrenceEntity(id) {
       return axios      
             .get('http://localhost:8080/ocorrencias/' + id)
-            .then((response) => {
+            .then(response => {
               console.log('dentro do getOcurrenceEntity')
               return JSON.stringify(response.data)
             })
-            .catch((error) => {
+            .catch(error => {
               console.error('deu erro porra 1')
             })
     }
