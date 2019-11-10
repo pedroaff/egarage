@@ -163,8 +163,10 @@
         label-for="input-horizontal">
 
           <b-form-input 
+          id="cep"
           v-mask="'#####-###'" 
           v-model.lazy="$v.form.cep.$model"
+          v-on:keyup="getCep()"
           :class="{ 'is-invalid': $v.form.cep.$error }">
           </b-form-input>
           
@@ -282,7 +284,17 @@ import { required, email, minLength, sameAs, maxLength } from "vuelidate/lib/val
                 this.form.email = "";
                 return this.existent = true;
             })
-        } 
+        },
+        getCep() {
+          let cep = this.form.cep
+
+          if(!this.$v.form.cep.$error)
+            axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+                .then((response) => {
+                  this.form.logradouro = response.data.logradouro
+                  this.form.complemento = response.data.complemento
+                })
+        }
     }
   }
 </script>

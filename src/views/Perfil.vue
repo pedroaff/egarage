@@ -29,6 +29,10 @@
               <td>{{ this.usuario.logradouro }}</td>
             </tr>
             <tr>
+              <td>Complemento </td>
+              <td>{{ this.usuario.complemento }}</td>
+            </tr>
+            <tr>
               <td>Tipo </td>
               <td>{{ this.usuario.tipo }}</td>
             </tr>
