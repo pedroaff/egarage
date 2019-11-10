@@ -12,6 +12,7 @@
         label-for="input-horizontal">
 
           <b-form-input 
+          type="text"
           v-model.lazy="$v.form.nome.$model"
           :class="{ 'is-invalid': $v.form.nome.$error }">
           </b-form-input>
@@ -50,6 +51,18 @@
             O email é obrigatório
           </div>
 
+          <div 
+            v-if="!$v.form.email.minLength" 
+            class="invalid-feedback">
+            Digite mais alguns caracteres
+          </div>
+
+          <div 
+          v-if="existent" 
+          class="invalid-feedback">
+            E-mail já cadastrado no sistema. Utilize outro endereço de email
+          </div>
+
         </b-form-group>
       </b-col>
         
@@ -62,8 +75,24 @@
         label="Senha"
         label-for="input-horizontal">
 
-          <b-form-input v-model="form.senha"></b-form-input>
-          
+          <b-form-input 
+          type="email "
+          :class="{ 'is-invalid': $v.form.senha.$error }" 
+          v-model.lazy="$v.form.senha.$model">
+          </b-form-input>
+
+          <div 
+            v-if="!$v.form.senha.required" 
+            class="invalid-feedback">
+            A senha é obrigatória
+          </div>
+
+          <div 
+            v-if="!$v.form.senha.minLength" 
+            class="invalid-feedback">
+            Digite mais alguns caracteres
+          </div>
+
         </b-form-group>
       </b-col>
 
@@ -74,8 +103,25 @@
         label-cols-lg="3"
         label="CPF"
         label-for="input-horizontal">
-          <b-form-input v-mask="'###.###.###-##'" v-model="form.cpf"></b-form-input>
+
+          <b-form-input 
+          v-mask="'###.###.###-##'" 
+          v-model.lazy="$v.form.cpf.$model"
+          :class="{ 'is-invalid': $v.form.cpf.$error }">
+          </b-form-input>
           
+          <div 
+            v-if="!$v.form.cpf.required" 
+            class="invalid-feedback">
+            O cpf é obrigatório
+          </div>
+
+          <div 
+            v-if="!$v.form.cpf.minLength" 
+            class="invalid-feedback">
+            Número inválido de caracteres
+          </div>
+
         </b-form-group>
       </b-col>
 
@@ -87,8 +133,24 @@
         label="Telefone"
         label-for="input-horizontal">
 
-          <b-form-input v-mask="'(##) #####-####'" v-model="form.telefone"></b-form-input>
+          <b-form-input 
+          v-mask="'(##) #####-####'" 
+          v-model.lazy="$v.form.telefone.$model"
+          :class="{ 'is-invalid': $v.form.telefone.$error }"
+          ></b-form-input>
           
+          <div 
+            v-if="!$v.form.telefone.required" 
+            class="invalid-feedback">
+            O telefone é obrigatório
+          </div>
+
+          <div 
+            v-if="!$v.form.telefone.minLength" 
+            class="invalid-feedback">
+            Número inválido de caracteres
+          </div>
+
         </b-form-group>
       </b-col>
 
@@ -100,8 +162,24 @@
         label="CEP"
         label-for="input-horizontal">
 
-          <b-form-input v-mask="'#####-###'" v-model="form.cep"></b-form-input>
+          <b-form-input 
+          v-mask="'#####-###'" 
+          v-model.lazy="$v.form.cep.$model"
+          :class="{ 'is-invalid': $v.form.cep.$error }">
+          </b-form-input>
           
+          <div 
+            v-if="!$v.form.cep.required" 
+            class="invalid-feedback">
+            O cep é obrigatório
+          </div>
+
+          <div 
+            v-if="!$v.form.cep.minLength" 
+            class="invalid-feedback">
+            Número inválido de caracteres
+          </div>
+
         </b-form-group>
       </b-col>
 
@@ -144,13 +222,14 @@
       </router-link>
 
      </b-form>
+
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import {mask} from 'vue-the-mask'
-import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import { required, email, minLength, sameAs, maxLength } from "vuelidate/lib/validators";
 
   export default {
     data() {
@@ -166,12 +245,17 @@ import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
             complemento: '',
             tipo: 'CLIENTE'
           },
+          existent: false,
       }
     },
     validations: {
       form: {
-          nome: { required, minLength: minLength(4) },
-          email: { required } 
+          nome: { required, minLength: minLength(4), maxLength: maxLength(15) },
+          email: { required, minLength: minLength(10)},
+          cpf: { required, minLength: minLength(14) },
+          senha: { required, minLength: minLength(6) },
+          telefone: {required, minLength: minLength(14)},
+          cep: { required, minLength: minLength(9) }
       },
     },
     directives: {mask},
@@ -192,10 +276,11 @@ import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
                 logradouro: this.form.logradouro,
                 complemento: this.form.complemento,
                 tipo: this.form.tipo,
-            }).then(function (response) {
+            }).then((response) => {
                 window.location.href = "http://localhost:8081/usuarios"
-            }).catch(function (error) {
-                console.log(error)
+            }).catch((error) => {
+                this.form.email = "";
+                return this.existent = true;
             })
         } 
     }
@@ -203,9 +288,5 @@ import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 </script>
 
 <style>
-.col-form-label {
-  text-align: "left"
-}
-
 
 </style>
