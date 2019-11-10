@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import About from './views/About'
 import Clientes from './views/Clientes'
 import Perfil from './views/Perfil'
 import Veiculos from './views/Veiculos'
@@ -22,11 +21,6 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About
     },
     {
       path: '/usuarios/:id',
