@@ -209,9 +209,6 @@ import {mask} from 'vue-the-mask'
                 return this.existent = true;
             })
         } 
-    },
-    mounted() {
-      console.log('ai meu cu')
     }
   }
 </script>
