@@ -181,6 +181,11 @@ import {mask} from 'vue-the-mask'
                  })
                })
                .then(res => {
+                 return axios.delete(veiculo + this.selectedVeiculo, {
+                   id: this.selectedVeiculo
+                 })
+               }) 
+               .then(res => {
                  window.location.href = "http://localhost:8081/ocorrencias"
                })
                .catch(error => {
