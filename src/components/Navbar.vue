@@ -21,7 +21,7 @@
                     <b-dropdown-item href="#">Aumento de fontes</b-dropdown-item>
                 </b-nav-item-dropdown>
 
-                <b-nav-item router-link to="/logout">Logout</b-nav-item>
+                <b-nav-item router-link to="/login">Logout</b-nav-item>
             </b-navbar-nav>
             </b-collapse>
         </b-navbar>

@@ -163,17 +163,14 @@ import {mask} from 'vue-the-mask'
           let veiculo = "http://localhost:8080/veiculos/"
           let ocorrencia = "http://localhost:8080/ocorrencias"
 
-
           axios
                .get(usuario + this.selectedCliente)
                .then(res => {
                 this.user = res.data 
-                console.log('setando usuario', this.usuario)
                 return axios.get(veiculo + this.selectedVeiculo)
                })
                .then(res => {
                  this.veiculo = res.data
-                 console.log('setando veiculo', this.veiculo)
                  return axios.post(ocorrencia, {
                     titulo: this.form.titulo,
                     descricao: this.form.descricao,

@@ -3,7 +3,6 @@
     <h1 align="left">Criar novo cliente</h1>
     <br>
     <b-form @submit.prevent="onSubmit" :disabled="$v.form.$invalid">
-      <b-col sm="5">
         <b-form-group
         id="fieldset-horizontal"
         label-cols-sm="4"
@@ -30,8 +29,7 @@
           </div>
 
         </b-form-group>
-    </b-col>
-      <b-col sm="5">
+
         <b-form-group
         id="fieldset-horizontal"
         label-cols-sm="4"
@@ -62,10 +60,7 @@
           </div>
 
         </b-form-group>
-      </b-col>
         
-
-      <b-col sm="5">
         <b-form-group
         id="fieldset-horizontal"
         label-cols-sm="4"
@@ -91,9 +86,7 @@
           </div>
 
         </b-form-group>
-      </b-col>
 
-      <b-col sm="5">
         <b-form-group
         id="fieldset-horizontal"
         label-cols-sm="4"
@@ -120,9 +113,7 @@
           </div>
 
         </b-form-group>
-      </b-col>
 
-      <b-col sm="5">
         <b-form-group
         id="fieldset-horizontal"
         label-cols-sm="4"
@@ -149,9 +140,7 @@
           </div>
 
         </b-form-group>
-      </b-col>
 
-      <b-col sm="5">
         <b-form-group
         id="fieldset-horizontal"
         label-cols-sm="4"
@@ -180,9 +169,7 @@
           </div>
 
         </b-form-group>
-      </b-col>
 
-      <b-col sm="5">
         <b-form-group
         id="fieldset-horizontal"
         label-cols-sm="4"
@@ -193,9 +180,7 @@
           <b-form-input v-model="form.logradouro"></b-form-input>
           
         </b-form-group>
-      </b-col>
 
-      <b-col sm="5">
         <b-form-group
         id="fieldset-horizontal"
         label-cols-sm="4"
@@ -203,10 +188,9 @@
         label="Complemento"
         label-for="complemento">
 
-          <b-form-input v-model="form.complemento"></b-form-input>
+          <b-form-input :maxlength="25" v-model="form.complemento"></b-form-input>
           
         </b-form-group>
-      </b-col>
 
       <b-button 
         class="float-left m-3" 
@@ -260,11 +244,6 @@ import { required, email, minLength, sameAs, maxLength } from "vuelidate/lib/val
       },
     },
     directives: {mask},
-    computed: {
-      validation() {
-        return this.form.nome.length > 4 && this.form.nome.length < 13
-      }
-    },
     methods: {
         onSubmit() {
             axios.post('http://localhost:8080/usuarios', {

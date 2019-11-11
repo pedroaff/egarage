@@ -44,7 +44,7 @@
       label-for="input-horizontal"
     >
         <b-form-input 
-        v-mask="'Aaaaaaaaaaaaa'"
+        :maxlength="15"
         v-model.lazy="$v.form.marca.$model"
         :class="{ 'is-invalid': $v.form.marca.$error }">
         </b-form-input>
@@ -72,7 +72,7 @@
       label-for="input-horizontal"
     >
         <b-form-input 
-        v-mask="'Aaaaaaaaaaaaa'"
+        :maxlength="15"
         v-model.lazy="$v.form.modelo.$model"
         :class="{ 'is-invalid': $v.form.modelo.$error }"
         >
@@ -154,7 +154,7 @@
 
 <script>
 import axios from 'axios'
-import { required, email, minLength, sameAs, maxLength } from "vuelidate/lib/validators";
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import {mask} from 'vue-the-mask'
 
   export default {
@@ -186,28 +186,23 @@ import {mask} from 'vue-the-mask'
       }
     },
     directives: {mask},
-    computed: {
-      validation() {
-        return this.form.placa.length > 4 && this.form.placa.length < 13
-      }
-    },
     methods: {
         onSubmit() {
-            let formData = JSON.stringify(this.form, this.selected)
-            console.log(this.formData)
-            axios.post('http://localhost:8080/veiculos', {
-                placa: this.form.placa,
-                marca: this.form.marca,
-                modelo: this.form.modelo,
-                ano: this.form.ano,
-                tipo: this.selected,
-                inativo: this.inativo
-            }).then((response) => {
-               window.location.href = "http://localhost:8081/veiculos"
-            }).catch((error) => {
-                this.form.placa = "";
-                return this.existent = true;
-            })
+           
+            axios
+                .post('http://localhost:8080/veiculos', {
+                    placa: this.form.placa,
+                    marca: this.form.marca,
+                    modelo: this.form.modelo,
+                    ano: this.form.ano,
+                    tipo: this.selected,
+                    inativo: this.inativo
+                }).then((response) => {
+                  window.location.href = "http://localhost:8081/veiculos"
+                }).catch((error) => {
+                    this.form.placa = "";
+                    return this.existent = true;
+                })
         } 
     }
   }
