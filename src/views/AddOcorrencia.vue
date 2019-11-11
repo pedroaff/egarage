@@ -31,8 +31,10 @@
             <select class='form-control' @change="onChangeUsuario($event)" v-model='selectedCliente'>
                 <option 
                 :key="cliente.id" 
-                v-for='cliente in clientes' 
-                :value='cliente.id'>
+                v-for='cliente in clientes'
+                v-if="cliente.tipo === 'CLIENTE'"
+                :value='cliente.id'
+                >
                   {{ cliente.nome }}
                 </option>
             </select>
@@ -111,6 +113,7 @@ import {mask} from 'vue-the-mask'
             .get(usuarios)
             .then(res => {
               this.clientes = res.data
+              console.log(res.data[4].tipo)
               return axios.get(usuario + res.data[0].id)
             })
             .then(res => {
