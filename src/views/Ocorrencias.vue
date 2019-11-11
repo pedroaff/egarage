@@ -22,7 +22,7 @@
         <template v-slot:cell(status)="data">
 
           <b v-if="data.item.fim" class="text-success">
-            Finalizada {{data.item.veiculo.placa}}
+            Concluída
           </b>
           
           <b v-if="!data.item.fim" class="text-warning">
