@@ -39,7 +39,7 @@
               </b-button>
             </router-link>
 
-            <b-button variant="warning" @click="onClose(data.item.id)" size="sm" class="mr-2">
+            <b-button :disabled="data.item.fim" variant="warning" @click="onClose(data.item.id)" size="sm" class="mr-2">
                 Encerrar
             </b-button>
 
@@ -113,32 +113,6 @@ export default {
   },
   methods: {
     onClose(id) {
-        console.log('entrando no onClose')
-        this.getOcurrenceEntity(id)
-            .then(response => {
-              console.log(response)
-              axios.put('http://localhost:8080/ocorrencias/encerrar/' + id, {
-                  response
-                })
-            })
-            .catch((error) => {
-              console.error('deu erro porra')
-            })
-    },
-
-    getOcurrenceEntity(id) {
-      return axios      
-            .get('http://localhost:8080/ocorrencias/' + id)
-            .then(response => {
-              console.log('dentro do getOcurrenceEntity')
-              return JSON.stringify(response.data)
-            })
-            .catch(error => {
-              console.error('deu erro porra 1')
-            })
-    },
-
-    onClose(id) {
       let encerrar = 'http://localhost:8080/ocorrencias/encerrar/'
       let ocorrencia = 'http://localhost:8080/ocorrencias/'
       let veiculo = 'http://localhost:8080/veiculos/'
@@ -155,6 +129,12 @@ export default {
              )
              .then(res => {
                return axios.put(veiculo + liberarVeiculo.id, {...liberarVeiculo, ...{inativo}})
+             })
+             .then(res => {
+               return axios.get(ocorrencia)
+             })
+             .then(res => {
+               this.ocorrencias = res.data
              })
              .catch(err => {
                console.log(err)
