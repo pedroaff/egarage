@@ -32,14 +32,17 @@
         </template>
 
           <template v-slot:cell(actions)="data">
+
             <router-link :to="`/ocorrencias/${data.item.id}`">
               <b-button variant="primary" size="sm" class="mr-2">
                 Detalhes
               </b-button>
             </router-link>
+
             <b-button variant="warning" @click="onClose(data.item.id)" size="sm" class="mr-2">
-              Encerrar
+                Encerrar
             </b-button>
+
           </template>
 
         </b-table>
@@ -133,6 +136,30 @@ export default {
             .catch(error => {
               console.error('deu erro porra 1')
             })
+    },
+
+    onClose(id) {
+      let encerrar = 'http://localhost:8080/ocorrencias/encerrar/'
+      let ocorrencia = 'http://localhost:8080/ocorrencias/'
+      let veiculo = 'http://localhost:8080/veiculos/'
+      
+      let liberarVeiculo
+      const inativo = false
+
+      axios 
+           .get(ocorrencia + id)
+           .then(res => {
+             liberarVeiculo = res.data.veiculo
+             return axios.put(encerrar + res.data.id, 
+               res.data,
+             )
+             .then(res => {
+               return axios.put(veiculo + liberarVeiculo.id, {...liberarVeiculo, ...{inativo}})
+             })
+             .catch(err => {
+               console.log(err)
+             })
+           })
     }
 
   }
