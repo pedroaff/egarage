@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Registrar ocorrência</h1>
+    <h1>Locar veículo</h1>
     <b-form @submit.prevent="onSubmit" :disabled="$v.form.$invalid">
     
       <b-form-group
@@ -17,6 +17,7 @@
 
       </b-form-group>
 
+  
       <b-form-group
       id="fieldset-horizontal"
       label-cols-sm="4"
@@ -77,8 +78,18 @@
           type="submit" 
           variant="primary"
           :disabled="$v.form.$invalid">
-          Salvar
+          Alugar
         </b-button>
+
+        <!-- se precisar colocar de novo o botão de aluguel, é fazer a validação se form.titulo == aluguel
+        <b-button 
+          v-else
+          class="float-left m-3" 
+          @click="onRegister" 
+          variant="primary"
+          :disabled="$v.form.$invalid">
+          Registrar
+        </b-button> -->
 
      </b-form>
 
@@ -113,6 +124,7 @@ import {mask} from 'vue-the-mask'
           selectedCliente: null,
           user: null,
           veiculo: null,
+          aluguel: true,
       }
     },
     validations: {
@@ -197,6 +209,35 @@ import {mask} from 'vue-the-mask'
         },
         onChangeUsuario() {
           this.selectedCliente = event.target.value
+        },
+        onRegister() {
+          let usuario = "http://localhost:8080/usuarios/"
+          let veiculo = "http://localhost:8080/veiculos/"
+          let ocorrencia = "http://localhost:8080/ocorrencias"
+
+          axios
+               .get(usuario + this.selectedCliente)
+               .then(res => {
+                this.user = res.data 
+                return axios.get(veiculo + this.selectedVeiculo)
+               })
+               .then(res => {
+                 this.veiculo = res.data
+                 return axios.post(ocorrencia, {
+                    titulo: this.form.titulo,
+                    descricao: this.form.descricao,
+                    fim: this.form.fim,
+                    veiculo: this.veiculo,
+                    usuario: this.user,
+                    id: ""
+                 })
+               })
+               .then(res => {
+                 window.location.href = "http://localhost:8081/ocorrencias"
+               })
+               .catch(error => {
+                 console.log(error)
+               })
         }
     }
   }

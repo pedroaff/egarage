@@ -39,8 +39,25 @@
               </b-button>
             </router-link>
 
-            <b-button :disabled="data.item.fim" variant="warning" @click="onClose(data.item.id)" size="sm" class="mr-2">
+            
+            <b-button 
+            v-if="data.item.titulo == 'aluguel'"
+            :disabled="data.item.fim" 
+            variant="warning" 
+            @click="onClose(data.item.id)" 
+            size="sm" 
+            class="mr-2">
                 Encerrar
+            </b-button>
+
+            <b-button 
+            v-else
+            :disabled="data.item.fim" 
+            variant="success" 
+            @click="onResolve(data.item.id)" 
+            size="sm" 
+            class="mr-2">
+                Resolver
             </b-button>
 
           </template>
@@ -57,7 +74,7 @@
 
     <div>
         <router-link to="/criar/ocorrencias/">
-            <b-button class="float-left" variant="primary">Criar ocorrência</b-button>
+            <b-button class="float-left" variant="primary">Registrar locação</b-button>
         </router-link>
     </div>
   </div>
@@ -130,6 +147,33 @@ export default {
              .then(res => {
                return axios.put(veiculo + liberarVeiculo.id, {...liberarVeiculo, ...{inativo}})
              })
+             .then(res => {
+               return axios.get(ocorrencia)
+             })
+             .then(res => {
+               this.ocorrencias = res.data
+             })
+             .catch(err => {
+               console.log(err)
+             })
+           })
+    },
+
+    onResolve(id) {
+      let encerrar = 'http://localhost:8080/ocorrencias/encerrar/'
+      let ocorrencia = 'http://localhost:8080/ocorrencias/'
+      let veiculo = 'http://localhost:8080/veiculos/'
+      
+      let liberarVeiculo
+      const inativo = false
+
+      axios 
+           .get(ocorrencia + id)
+           .then(res => {
+             liberarVeiculo = res.data.veiculo
+             return axios.put(encerrar + res.data.id, 
+               res.data,
+             )
              .then(res => {
                return axios.get(ocorrencia)
              })
