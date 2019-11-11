@@ -56,7 +56,7 @@
           <div 
           v-if="existent" 
           class="invalid-feedback">
-            E-mail já cadastrado no sistema. Utilize outro endereço de email
+            Esse valor já deve existir no banco de dados.
           </div>
 
         </b-form-group>
@@ -110,6 +110,12 @@
             v-if="!$v.form.cpf.minLength" 
             class="invalid-feedback">
             Número inválido de caracteres
+          </div>
+
+          <div 
+          v-if="existent" 
+          class="invalid-feedback">
+            Esse valor já deve existir no banco de dados.
           </div>
 
         </b-form-group>
@@ -260,6 +266,7 @@ import { required, email, minLength, sameAs, maxLength } from "vuelidate/lib/val
                 window.location.href = "http://localhost:8081/usuarios"
             }).catch((error) => {
                 this.form.email = "";
+                this.form.cpf = ""
                 return this.existent = true;
             })
         },
