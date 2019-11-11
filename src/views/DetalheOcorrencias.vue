@@ -115,19 +115,20 @@ export default {
   },
   created () {
       this.params = this.$route.params
-      console.log('propertyComputed will update, as this.property is now reactive.')
   },
   mounted () {
     console.log(this.params)
-    axios.get('http://localhost:8080/ocorrencias/' + this.params.id ).then(result => {
-      this.ocorrencia = result.data
-      console.log(this.ocorrencia)
-      console.log(this.params.id)
-      console.log('foi fdp')
-    }, error => {
-      console.log(this.params.id)
-      console.error(error)
-    })
+    axios
+        .get('http://localhost:8080/ocorrencias/' + this.params.id )
+        .then(result => {
+          this.ocorrencia = result.data
+          console.log(this.ocorrencia)
+          console.log(this.params.id)
+          console.log('foi fdp')
+        }, error => {
+          console.log(this.params.id)
+          console.error(error)
+        })
   }
 }
 </script>
