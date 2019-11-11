@@ -41,7 +41,7 @@
 
             
             <b-button 
-            v-if="data.item.titulo == 'aluguel'"
+            v-if="data.item.titulo == 'Aluguel'"
             :disabled="data.item.fim" 
             variant="warning" 
             @click="onClose(data.item.id)" 

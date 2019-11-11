@@ -4,40 +4,6 @@
     <b-form @submit.prevent="onSubmit" :disabled="$v.form.$invalid">
     
       <b-form-group
-      id="fieldset-horizontal"
-      label-cols-sm="4"
-      label-cols-lg="3"
-      label="Título"
-      label-for="input-horizontal"
-    >
-        <b-form-input 
-        :maxlength="20"
-        v-model.lazy="$v.form.titulo.$model">
-        </b-form-input>
-
-      </b-form-group>
-
-  
-      <b-form-group
-      id="fieldset-horizontal"
-      label-cols-sm="4"
-      label-cols-lg="3"
-      label="Descrição"
-      label-for="input-horizontal">
-
-        <b-form-textarea 
-        id="textarea"
-        placeholder="Descreva a ocorrência..."
-        rows="3"
-        :maxlength="250"
-        max-rows="6"
-        v-model.lazy="$v.form.descricao.$model">
-        </b-form-textarea>
-        
-      </b-form-group>
-
-
-      <b-form-group
           id="fieldset-horizontal"
           label-cols-sm="4"
           label-cols-lg="3"
@@ -112,8 +78,8 @@ import {mask} from 'vue-the-mask'
           veiculos: [],
           clientes: [],
           form: {
-            titulo: '',
-            descricao: '',
+            titulo: 'Aluguel',
+            descricao: 'locação de veículo',
             inicio: '',
             fim: '',
             veiculo_id: '',
@@ -134,11 +100,6 @@ import {mask} from 'vue-the-mask'
       }
     },
     directives: {mask},
-    computed: {
-      validation() {
-        return this.form.titulo.length > 4 && this.form.titulo.length < 13
-      }
-    },
     mounted () {
 
        let usuarios = "http://localhost:8080/usuarios"
