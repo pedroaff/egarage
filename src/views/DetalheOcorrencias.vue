@@ -4,7 +4,7 @@
         <table class="table table-sm table-striped">
           <thead>
             <tr>
-              <b>Informações gerais</b>
+              <th>Informações gerais</th>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +26,8 @@
             </tr>
             <tr>
               <td>Está ativa?</td>
-              <td>{{ this.ocorrencia.fim }}</td>
+              <td v-if="this.ocorrencia.fim">Concluída</td>
+              <td v-else>Em andamento</td>
             </tr>
           </tbody>
         </table>
@@ -34,7 +35,7 @@
         <table class="table table-sm table-striped">
           <thead>
             <tr>
-              <b>Veículo da ocorrência</b>
+              <th>Veículo</th>
             </tr>
           </thead>
           <tbody>
@@ -68,7 +69,7 @@
         <table class="table table-sm table-striped">
           <thead>
             <tr>
-              <b>Usuário da ocorrência</b>
+              <th>Usuário</th>
             </tr>
           </thead>
           <tbody>
@@ -130,3 +131,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+
+th {
+  min-width: 300px
+}
+
+</style>
