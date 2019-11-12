@@ -135,7 +135,6 @@ export default {
       let veiculo = 'http://localhost:8080/veiculos/'
       
       let liberarVeiculo
-      const inativo = false
 
       axios 
            .get(ocorrencia + id)
@@ -145,9 +144,11 @@ export default {
                res.data,
              )
              .then(res => {
-               return axios.put(veiculo + liberarVeiculo.id, {...liberarVeiculo, ...{inativo}})
+               console.log('pra liberar ', liberarVeiculo)
+               return axios.put(veiculo + liberarVeiculo.id, {...liberarVeiculo, inativo:false})
              })
              .then(res => {
+               console.log('liberado, ', liberarVeiculo)
                return axios.get(ocorrencia)
              })
              .then(res => {
