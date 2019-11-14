@@ -2,7 +2,7 @@
   <div>
     <h1> Lista de Ocorrências</h1>
         <b-table striped hover 
-        :items="ocorrencias" 
+        :items="ocurrences" 
         :fields="fields"
         :perPage="perPage"
         :current-page="currentPage"
@@ -38,20 +38,8 @@
                 Detalhes
               </b-button>
             </router-link>
-
-            
+    
             <b-button 
-            v-if="data.item.titulo == 'Aluguel'"
-            :disabled="data.item.fim" 
-            variant="warning" 
-            @click="onClose(data.item.id)" 
-            size="sm" 
-            class="mr-2">
-                Encerrar
-            </b-button>
-
-            <b-button 
-            v-else
             :disabled="data.item.fim" 
             variant="success" 
             @click="onResolve(data.item.id)" 
@@ -72,11 +60,6 @@
           aria-controls="my-table"
         ></b-pagination>
 
-    <div>
-        <router-link to="/criar/ocorrencias/">
-            <b-button class="float-left" variant="primary">Registrar locação</b-button>
-        </router-link>
-    </div>
   </div>
 </template>
 
@@ -117,8 +100,17 @@ export default {
   },
   computed: {
     rows() {
-      return this.ocorrencias.length
-    }
+      return this.ocurrences.length
+    },
+    ocurrences() {
+      var ocurrences = this.ocorrencias.filter(function (e) {
+            if(e.titulo != 'aluguel')
+                return e
+        })
+
+        console.log('testando', ocurrences)
+        return ocurrences
+    },
   },
   mounted () {
     axios.get('http://localhost:8080/ocorrencias').then(result => {
