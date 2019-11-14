@@ -3,8 +3,7 @@
       <div class="container">
 
         <footer>
-          <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-          <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+          <p>E-garage © 2019 </p>
         </footer>
 
       </div>
@@ -32,8 +31,10 @@ footer {
   bottom: 0;
   left: 0;
   padding: 1rem;
-  background-color: #efefef;
+  background-color: black;
   text-align: center;
+  color: white;
+  font-weight: 600;
 }
 
 </style>
