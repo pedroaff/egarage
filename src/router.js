@@ -11,6 +11,7 @@ import Ocorrencias from './views/Ocorrencias'
 import DetalheOcorrencias from './views/DetalheOcorrencias'
 import AddOcorrencia from './views/AddOcorrencia'
 import Login from './views/Login'
+import Alugueis from './views/Alugueis'
 
 Vue.use(Router)
 
@@ -72,6 +73,11 @@ export default new Router({
       path: '/criar/ocorrencias/',
       name: 'addOcorrencia',
       component: AddOcorrencia
+    },
+    {
+      path: '/alugueis',
+      name: 'alugueis',
+      component: Alugueis
     }
   ]
 })

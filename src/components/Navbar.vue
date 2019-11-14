@@ -13,6 +13,7 @@
                 <b-nav-item router-link to="/usuarios">Usuários</b-nav-item>
                 <b-nav-item router-link to="/veiculos">Veículos</b-nav-item>
                 <b-nav-item router-link to="/ocorrencias">Ocorrências</b-nav-item>
+                <b-nav-item router-link to="/alugueis">Aluguéis</b-nav-item>
             </b-navbar-nav>
 
             <!-- Right aligned nav items -->
