@@ -61,7 +61,7 @@
 
      </b-form>
 
-     <router-link :to="`/ocorrencias/`">
+     <router-link :to="`/alugueis/`">
           <b-button class="float-left mr-2 m-3" variant="danger">
                 Voltar
           </b-button>
@@ -113,7 +113,6 @@ import {mask} from 'vue-the-mask'
             .get(usuarios)
             .then(res => {
               this.clientes = res.data
-              console.log(res.data[4].tipo)
               return axios.get(usuario + res.data[0].id)
             })
             .then(res => {
@@ -162,7 +161,7 @@ import {mask} from 'vue-the-mask'
                  })
                }) 
                .then(res => {
-                 window.location.href = "http://localhost:8081/ocorrencias"
+                 window.location.href = "http://localhost:8081/alugueis"
                })
                .catch(error => {
                  console.log(error)

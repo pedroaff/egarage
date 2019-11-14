@@ -104,7 +104,7 @@ export default {
     },
     ocurrences() {
       var ocurrences = this.ocorrencias.filter(function (e) {
-            if(e.titulo != 'aluguel')
+            if(e.titulo != 'Aluguel')
                 return e
         })
 
@@ -115,7 +115,6 @@ export default {
   mounted () {
     axios.get('http://localhost:8080/ocorrencias').then(result => {
       this.ocorrencias = result.data
-      console.log('foi')
     }, error => {
       console.error(error)
     })
@@ -136,11 +135,9 @@ export default {
                res.data,
              )
              .then(res => {
-               console.log('pra liberar ', liberarVeiculo)
                return axios.put(veiculo + liberarVeiculo.id, {...liberarVeiculo, inativo:false})
              })
              .then(res => {
-               console.log('liberado, ', liberarVeiculo)
                return axios.get(ocorrencia)
              })
              .then(res => {

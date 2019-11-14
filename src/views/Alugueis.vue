@@ -10,23 +10,26 @@
         :sort-desc.sync="sortDesc"
         >
 
-        <template v-slot:cell(envolvidos)="data">
-
-          <b class="text-info">
-            {{data.item.usuario.nome}} com {{data.item.veiculo.placa}}
-          </b>
-
+        <template v-slot:cell(usuario)="data">
+            {{data.item.usuario.nome}}
         </template>
 
+        <template v-slot:cell(veiculo)="data">
+            {{data.item.veiculo.modelo}}
+        </template>
+
+        <template v-slot:cell(placa)="data">
+            {{data.item.veiculo.placa}} 
+        </template>
 
         <template v-slot:cell(status)="data">
 
           <b v-if="data.item.fim" class="text-success">
-            Concluída
+            Devolvido
           </b>
           
           <b v-if="!data.item.fim" class="text-warning">
-            Em andamento 
+            Em uso
           </b>
 
         </template>
@@ -80,12 +83,16 @@ export default {
           sortable: true
         },
         {
-          key: 'titulo',
+          key: 'veiculo',
           sortable: true
         },
         {
-          key: 'envolvidos',
-          sortable: false
+          key: 'usuario',
+          sortable: true,
+        },
+        {
+          key: 'placa',
+          sortable: true,
         },
         {
           key: 'status',
@@ -110,7 +117,7 @@ export default {
     },
     alugueis() {
         var alugueis = this.ocorrencias.filter(function (e) {
-            if(e.titulo == 'aluguel')
+            if(e.titulo == 'Aluguel')
                 return e
         })
 
@@ -121,7 +128,6 @@ export default {
   mounted () {
     axios.get('http://localhost:8080/ocorrencias').then(result => {
       this.ocorrencias = result.data
-      console.log('teste', result.data)
     }, error => {
       console.error(error)
     })
@@ -142,11 +148,9 @@ export default {
                res.data,
              )
              .then(res => {
-               console.log('pra liberar ', liberarVeiculo)
                return axios.put(veiculo + liberarVeiculo.id, {...liberarVeiculo, inativo:false})
              })
              .then(res => {
-               console.log('liberado, ', liberarVeiculo)
                return axios.get(ocorrencia)
              })
              .then(res => {
